@@ -15,6 +15,7 @@ wb = load_workbook('./names_v6.xlsx')
 sheet = wb['Sheet1']
 
 
+
 def values(num):
     result = {'NUM': sheet[f'A{num}'].value,
               'RESEARCH_TYPE': sheet[f'B{num}'].value,
