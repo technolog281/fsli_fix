@@ -6,74 +6,158 @@ from openpyxl import Workbook
 
 wb = load_workbook('./names_v5.xlsx')
 sheet_1 = wb['Sheet1']
-num = 1
-values_2 = {'G_NAME': str(sheet_1[f'A{num}'].value),
-            'NAME': str(sheet_1[f'B{num}'].value),
-            'CODE': str(sheet_1[f'C{num}'].value)}
-# values_2 = [str(sheet_1[f'A{num}'].value), str(sheet_1[f'B{num}'].value), str(sheet_1[f'C{num}'].value)]
-num_symbols = ('1', '2', '3', '4', '5', '6', '7', '(')
-wb_ext = Workbook('names_upgrade.xlsx')
-ws = wb_ext.create_sheet('Sheet1')
-print(values_2['G_NAME'])
-ws.append([values_2['G_NAME'], values_2['NAME'], values_2['CODE']])
-#
-#
-# for num in range(2, 200):
-#     start_g_name = values_2['G_NAME']
-#     start_name = values_2['NAME']
-#     if 'производн' in start_g_name:
-#         values_2['CODE'] = '200'
-#         ws.append([values_2['G_NAME'], values_2['NAME'], values_2['CODE']])
-#         # ws.append(values_2['NAME'])
-#         # ws.append(values_2['CODE'])
-#         # ws[f'A{num}'] = values_2['G_NAME']
-#         # ws[f'B{num}'] = values_2['NAME']
-#         # ws[f'C{num}'] = values_2['CODE']
-#     elif 'Днк' or 'Рнк' in start_name:
-#         values_2['CODE'] = '208'
-#         # rf.append(values_2, ignore_index=True, sort=False)
-#     elif 'иммунофермент' in start_name:
-#         values_2['CODE'] = '206'
-#         # rf.append(values_2, ignore_index=True, sort=False)
-#     elif 'иммунохромат' in start_name:
-#         values_2['CODE'] = '204'
-#         # rf.append(values_2, ignore_index=True, sort=False)
-#     elif 'рН' in start_g_name:
-#         values_2['CODE'] = '200'
-#         # rf.append(values_2, ignore_index=True, sort=False)
-#     elif 'Массовая концентрация' or 'Массовое содержание' in start_name:
-#         values_2['CODE'] = '200'
-#         # rf.append(values_2, ignore_index=True, sort=False)
-#     elif 'ромбоцит' or 'ейкоцит' or 'ритроцит' or 'имфорцит' in start_g_name:
-#         values_2['CODE'] = '202'
-#         # rf.append(values_2, ignore_index=True, sort=False)
-#     elif 'бнаружени' in start_name:
-#         values_2['CODE'] = '208'
-#         # rf.append(values_2, ignore_index=True, sort=False)
-#     elif 'иммунофлуор' in start_name:
-#         values_2['CODE'] = '207'
-#         # rf.append(values_2, ignore_index=True, sort=False)
-#     elif 'иммунохеми' in start_name:
-#         values_2['CODE'] = '207'
-#         # rf.append(values_2, ignore_index=True, sort=False)
-#     elif 'иммунолог' in start_name:
-#         values_2['CODE'] = '204'
-#         # rf.append(values_2, ignore_index=True, sort=False)
-#     elif 'ремя' in start_name:
-#         values_2['CODE'] = '201'
-#         # rf.append(values_2, ignore_index=True, sort=False)
-#     elif 'микроорган' or 'ультур' in start_name:
-#         values_2['CODE'] = '208'
-#         # rf.append(values_2, ignore_index=True, sort=False)
-#     elif 'язкост' or 'Запах' or 'Цвет' in start_name:
-#         values_2['CODE'] = '201'
-#         # rf.append(values_2, ignore_index=True, sort=False)
-#     elif 'олярная' in start_name:
-#         values_2['CODE'] = '200'
-#         # rf.append(values_2, ignore_index=True, sort=False)
-#     # else:
-#     #     # rf.append(values_2, ignore_index=True, sort=False)
-#
-# # print(rf)
-# # df.to_excel('names_v9.xlsx')
-#
+df = pd.DataFrame(
+    columns=['G_NAME', 'NAME', 'CODE'])
+
+for num in range(2, sheet_1.max_row + 1):
+    values_2 = {'G_NAME': sheet_1[f'B{num}'].value,
+                'NAME': sheet_1[f'C{num}'].value,
+                'CODE': sheet_1[f'D{num}'].value}
+    g_name = values_2['G_NAME']
+    name = values_2['NAME']
+    if 'производн' in g_name:
+        values_2['CODE'] = '200'
+        df = df.append(values_2, ignore_index=True)
+    elif 'иммунолог' in name:
+        values_2['CODE'] = '204'
+        df = df.append(values_2, ignore_index=True)
+    elif 'нтитела' in g_name:
+        values_2['CODE'] = '204'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'Днк ' in name:
+        values_2['CODE'] = '208'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'Рнк ' in name:
+        values_2['CODE'] = '208'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'мплификац' in name:
+        values_2['CODE'] = '207'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'икроскоп' in name:
+        values_2['CODE'] = '208'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'иммуноферм' in name:
+        values_2['CODE'] = '206'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'иммунохром' in name:
+        values_2['CODE'] = '204'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'рН' in g_name:
+        values_2['CODE'] = '200'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'онцентрация' in name:
+        values_2['CODE'] = '200'
+        df = df.append(values_2, ignore_index=True)
+    elif 'одержание' in name:
+        values_2['CODE'] = '200'
+        df = df.append(values_2, ignore_index=True)
+    elif 'ромбо' in g_name:
+        values_2['CODE'] = '202'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'ейкоц' in g_name:
+        values_2['CODE'] = '202'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'ритроц' in g_name:
+        values_2['CODE'] = '202'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'имфоцит' in g_name:
+        values_2['CODE'] = '202'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'иммунофлуор' in name:
+        values_2['CODE'] = '207'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'иммунохеми' in name:
+        values_2['CODE'] = '207'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'ремя' in name:
+        values_2['CODE'] = '201'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'микроорган' in name:
+        values_2['CODE'] = '208'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'ультур' in name:
+        values_2['CODE'] = '208'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'язкост' in name:
+        values_2['CODE'] = '201'
+        df = df.append(values_2, ignore_index=True)
+    elif 'Запах' in name:
+        values_2['CODE'] = '201'
+        df = df.append(values_2, ignore_index=True)
+    elif 'Цвет' in name:
+        values_2['CODE'] = '201'
+        df = df.append(values_2, ignore_index=True)
+    elif 'олярная' in name:
+        values_2['CODE'] = '200'
+        df = df.append(values_2, ignore_index=True)
+    elif 'скоро' in name:
+        values_2['CODE'] = '200'
+        df = df.append(values_2, ignore_index=True)
+    elif 'бсолют' in name:
+        values_2['CODE'] = '209'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'тносит' in name:
+        values_2['CODE'] = '209'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'оксин' in name:
+        values_2['CODE'] = '208'
+        df = df.append(values_2, ignore_index=True)
+        continue
+    elif 'дентификац' in name:
+        values_2['CODE'] = '208'
+        df = df.append(values_2, ignore_index=True)
+    elif 'бнаруж' in name:
+        values_2['CODE'] = '200'
+        df = df.append(values_2, ignore_index=True)
+    elif 'тношени' in name:
+        values_2['CODE'] = '200'
+        df = df.append(values_2, ignore_index=True)
+    elif 'рипп' in g_name:
+        values_2['CODE'] = '201'
+        df = df.append(values_2, ignore_index=True)
+    elif 'руппа кров' in g_name:
+        values_2['CODE'] = '202'
+        df = df.append(values_2, ignore_index=True)
+    elif 'ph' in name:
+        values_2['CODE'] = '200'
+        df = df.append(values_2, ignore_index=True)
+    elif 'итолог' in name:
+        values_2['CODE'] = '209'
+        df = df.append(values_2, ignore_index=True)
+    elif 'минимальной подавл' in name:
+        values_2['CODE'] = '208'
+        df = df.append(values_2, ignore_index=True)
+    elif 'итолог' in g_name:
+        values_2['CODE'] = '209'
+        df = df.append(values_2, ignore_index=True)
+    elif 'имницк' in g_name:
+        values_2['CODE'] = '201'
+        df = df.append(values_2, ignore_index=True)
+    elif 'икробиолог' in g_name:
+        values_2['CODE'] = '208'
+        df = df.append(values_2, ignore_index=True)
+    else:
+        values_2['CODE'] = '000'
+        df = df.append(values_2, ignore_index=True)
+
+# print(rf)
+df.to_excel('names_v9.xlsx')
