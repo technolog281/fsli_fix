@@ -2,7 +2,7 @@ import pyodbc
 from openpyxl import load_workbook
 from search_last_list import last_page
 
-wb = load_workbook('./temp.xlsx')
+wb = load_workbook('xlsx/temp.xlsx')
 sheet = wb['Temp_worker']
 
 cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};'

@@ -1,6 +1,6 @@
 from __init__ import *
 
-wb = load_workbook('./names_v6.xlsx')
+wb = load_workbook('xlsx/names_v6.xlsx')
 sheet = wb['Sheet1']
 df = pd.DataFrame(
     columns=['NUM', 'RESEARCH_TYPE', 'RESEARCH_PARAM', 'NMU', 'BIOM', 'UNIT', 'LIS_CODE', 'MAT_CODE' 'LAB_TYPE'])

@@ -4,7 +4,7 @@ import pandas as pd
 from openpyxl import load_workbook
 from openpyxl import Workbook
 
-wb = load_workbook('./names_v5.xlsx')
+wb = load_workbook('xlsx/names_v5.xlsx')
 sheet_1 = wb['Sheet1']
 df = pd.DataFrame(
     columns=['G_NAME', 'NAME', 'CODE'])

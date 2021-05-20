@@ -1,6 +1,6 @@
 from openpyxl import load_workbook
 
-wb = load_workbook('temp.xlsx')
+wb = load_workbook('xlsx/temp.xlsx')
 
 
 def last_page(col):

@@ -3,8 +3,9 @@ from openpyxl import load_workbook
 import loguru as log
 from search_last_list import last_page
 import pandas as pd
+import logging
 
-wb = load_workbook('./names_v5.xlsx')
+wb = load_workbook('temp_list.xlsx')
 sheet = wb['Sheet1']
 
 
@@ -12,12 +13,12 @@ def values(num):
     result = {'Num': sheet[f'A{num}'].value,
               'ResearchName': sheet[f'B{num}'].value,
               'ParamName': sheet[f'C{num}'].value,
-              'Code_MIS': sheet[f'D{num}'].value,
+              'Code_MIS': str(sheet[f'D{num}'].value),
               'Biom': sheet[f'E{num}'].value,
               'Unit': sheet[f'F{num}'].value,
-              'Code_Lis': sheet[f'G{num}'].value,
+              'Code_Lis': str(sheet[f'G{num}'].value),
               'Lab_Type': sheet[f'H{num}'].value,
-              'Research_Type': sheet[f'I{num}'].value}
+              'Research_Type': str(sheet[f'I{num}'].value)}
     return result
 
 

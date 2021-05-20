@@ -2,7 +2,7 @@ from openpyxl import load_workbook
 from search_last_list import last_page
 import pandas as pd
 
-wb = load_workbook('./names_v5.xlsx')
+wb = load_workbook('xlsx/names_v5.xlsx')
 sheet = wb['Sheet1']
 df = pd.DataFrame(columns=['NUM', 'RESEARCH_TYPE', 'RESEARCH_PARAM', 'NMU', 'BIOM', 'UNIT', 'LIS_CODE', 'LAB_TYPE'])
 
